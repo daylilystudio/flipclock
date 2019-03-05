@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta charset="UTF-8">
+	<title>flipclock js</title>
+	<link rel="stylesheet" href="compiled/flipclock.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="compiled/flipclock.min.js"></script>
+	
+<style>
+.message2{display:none;}
+</style>
+
+<script>
+$(function () {
+	//時鐘Start
+	var currentDate = new Date();
+	var futureDate = new Date("2019/03/05 23:59:59"); // yyyy/MM/DD hh:mm:ss
+	var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+	if (diff < 0) {
+		diff = 0;
+		$(".message1, .clock").hide();
+		$(".message2").show();
+	}
+	var clock = $(".clock").FlipClock(diff, {
+		clockFace: 'DailyCounter',
+		autoStart: false,
+		callbacks: {
+		        	stop: function() {
+		        		$(".message1, .clock").hide();
+						$(".message2").show();
+		        	}
+		        }
+	});
+	clock.setCountdown(true);
+	clock.start();
+	//時鐘End
+});
+</script>
+
+</head>
+<body>
+
+
+
+<div class="message1">本檔瘋搶優惠倒數</div>
+<div class="clock"></div>
+<div class="message2">本檔瘋優惠活動已截止!!</div>
+
+<a href="http://flipclockjs.com/">jQuery套件網頁</a>
+
+</body>
+</html>
